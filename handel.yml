@@ -1,0 +1,43 @@
+version: 1
+
+name: dsw88-lambda-test
+
+environments:
+  dev:
+    function:
+      type: lambda
+      path_to_code: .
+      handler: index.handler
+      runtime: nodejs6.10
+      memory: 256
+      timeout: 5
+      environment_variables:
+        MY_FIRST_VAR: my_first_value
+        MY_SECOND_VAR: my_second_value
+      dependencies:
+      - db
+      - GitHub://byu-oit-appdev/dsw88-topic-test/dsw88-topic-test/dev/topic
+    # topic:
+    #   type: sns
+    #   event_consumers:
+    #   - service_name: function
+    # app:
+    #   type: apigateway
+    #   path_to_code: .
+    #   lambda_runtime: nodejs6.10
+    #   handler_function: index.handler
+    #   provisioned_memory: 256
+    #   function_timeout: 5
+    #   environment_variables:
+    #     MY_FIRST_VAR: my_first_value
+    #     MY_SECOND_VAR: my_second_value
+    #   dependencies:
+    #   - db
+    db:
+      type: dynamodb
+      partition_key:
+        name: MyPartitionKey
+        type: String
+      provisioned_throughput:
+        read_capacity_units: 6
+        write_capacity_units: 6
