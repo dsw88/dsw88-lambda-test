@@ -14,6 +14,8 @@ environments:
       environment_variables:
         MY_FIRST_VAR: my_first_value
         MY_SECOND_VAR: my_second_value
+      external_event_producers: # Explicit allow for other apps to send events to me
+      - https://raw.githubusercontent.com/byu-oit-appdev/dsw88-topic-test/master/handel.yml#appName=dsw88-efs-test&environmentName=dev&serviceName=topic
     # topic:
     #   type: sns
     #   event_consumers:
