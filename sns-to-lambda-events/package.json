@@ -3,7 +3,5 @@
   "version": "0.0.1",
   "author": "David Woodruff",
   "license": "Apache-2.0",
-  "dependencies": {
-    "aws-sdk": "^2.9.0"
-  }
+  "dependencies": { }
 }

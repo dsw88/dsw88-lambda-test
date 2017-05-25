@@ -1,0 +1,24 @@
+version: 1
+
+name: beanstalk-example
+
+environments:
+  dev:
+    webapp:
+      type: beanstalk
+      path_to_code: .
+      solution_stack: 64bit Amazon Linux 2016.09 v4.0.1 running Node.js
+      instance_type: t2.micro
+      key_name: aws-credential-detector
+      health_check_url: /
+      min_instances: 1
+      max_instances: 1
+      environment_variables:
+        MY_INJECTED_VAR: myValue
+      routing:
+        type: https
+        https_certificate: 1ffa8f5e-9fe1-4def-ad1d-83c052a352a7
+      dependencies:
+      - queue
+    queue:
+      type: sqs

@@ -1,0 +1,19 @@
+version: 1
+
+pipelines:
+  dev:
+    phases:
+    - type: github
+      name: GitHub
+      owner: byu-oit-appdev
+      repo: handel-examples
+      branch: master
+    - type: codebuild
+      name: Build
+      build_image: aws/codebuild/docker:1.12.1
+      environment_variables:
+        ENVS_TO_DEPLOY: dev
+    - type: handel
+      name: DevDeploy
+      environments_to_deploy:
+      - dev
