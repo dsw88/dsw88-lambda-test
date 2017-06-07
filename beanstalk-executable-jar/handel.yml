@@ -1,0 +1,10 @@
+version: 1
+
+name: dsw88javatest
+
+environments:
+  dev:
+    webapp:
+      type: beanstalk
+      path_to_code: target/dsw88javatest.jar
+      solution_stack: 64bit Amazon Linux 2017.03 v2.5.0 running Java 8
