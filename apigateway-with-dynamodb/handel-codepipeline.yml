@@ -1,5 +1,7 @@
 version: 1
 
+name: apigateway-test
+
 pipelines:
   dev:
     phases:
