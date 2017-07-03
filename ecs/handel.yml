@@ -1,0 +1,17 @@
+version: 1
+
+name: ecs-test
+
+environments:
+  dev:
+    webapp:
+      type: ecs
+      port_mappings:
+      - 5000
+      key_name: aws-credential-detector
+      instance_type: t2.micro
+      min_containers: 2
+      max_containers: 2
+      max_mb: 256
+      routing:
+        type: http
