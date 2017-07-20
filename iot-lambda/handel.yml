@@ -1,0 +1,21 @@
+version: 1
+
+name: dsw88-lambda-test
+
+environments:
+  dev:
+    topicrule:
+      type: iot
+      event_consumers:
+      # In produce_events, all of these conusmers will be batched up into a single topic rule?
+        # THis may be difficult since produce_events gets called multiple times
+      # Another option is to create a new rule for each one, but then the rule arn is different for each one
+      # Currently only support lambda, but possible to support others
+      - service_name: function
+        sql: "SELECT * FROM 'iotbutton/#'"
+        rule_disabled: true
+    function:
+      type: lambda
+      path_to_code: .
+      handler: index.handler
+      runtime: nodejs6.10

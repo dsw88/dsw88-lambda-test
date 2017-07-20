@@ -1,0 +1,15 @@
+version: 1
+
+name: elasticache-test
+
+environments:
+  dev:
+    elasticache:
+      type: redis
+      instance_type: cache.t2.medium
+      redis_version: 3.2.4
+      tags:
+        team: OIT_APP_DEV_STUDENT_INFO_MGMT
+        env: dev
+        data-sensitivity: confidential
+        app: institutes

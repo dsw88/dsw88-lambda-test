@@ -6,12 +6,40 @@ environments:
   dev:
     webapp:
       type: ecs
-      port_mappings:
-      - 5000
-      key_name: aws-credential-detector
-      instance_type: t2.micro
-      min_containers: 2
-      max_containers: 2
-      max_mb: 256
-      routing:
-        type: http
+      cluster:
+        key_name: aws-credential-detector
+      auto_scaling: # Required
+        # This scales the entire task equally, so all containers inside the task have equal counts
+        min_tasks: 2 # Required
+        max_tasks: 2 # Required
+      load_balancer: # Optional
+        type: https # Default to HTTP
+        timeout: 60 #Optional
+        https_certificate: 1ffa8f5e-9fe1-4def-ad1d-83c052a352a7 # Required if type=https
+      tags:
+        mytag: myvalue
+      containers:
+      - name: ecstest # Required
+        port_mappings: # Optional
+        - 5000
+        max_mb: 256 # Optional
+        cpu_units: 101
+        environment_variables:
+          MY_VAR: myvalue
+          # Other stuff optional
+        # TODO - THIS NEEDS TO BE IMPLEMENTED
+        # We will need to allow the image to be specified manually, but the image name includes the registry! How to get around this?
+        # image: someimagename # Don't require the AWS registry specific stuff, just the image name
+
+
+        # TODO - Only one container is allowed to be routed through the ALB currently. In the future that may change, so keep the routing here, but only allow one in the check phase
+        routing:
+          base_path: /mypath
+          health_check_path: /
+          # TODO - THIS NEEDS TO BE IMPLEMENTED!
+          # alb_path: /some/path/to/something # Default to / or require?
+      - name: othertest
+        port_mappings:
+        - 5000
+        max_mb: 256
+

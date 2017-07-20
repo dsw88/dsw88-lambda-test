@@ -1,0 +1,39 @@
+version: 1
+
+name: my-ecs-app
+
+environments:
+  dev:
+    webapp:
+      type: dynamodb
+      partition_key: # Required, NOT updateable
+        name: MyPartitionKey
+        type: String
+      # sort_key:
+      #   name: MySortKey
+      #   type: Number
+      # provisioned_throughput:
+      #   read_capacity_units: 6
+      #   write_capacity_units: 6
+      # global_indexes:
+      # - name: myglobal
+      #   partition_key:
+      #     name: MyPartitionKey
+      #     type: String
+      #   sort_key:
+      #     name: MyGlobalSortKey
+      #     type: String
+      #   attributes_to_copy:
+      #   - MyOtherGlobalAttribute
+      #   provisioned_throughput:
+      #     read_capacity_units: 2
+      #     write_capacity_units: 2
+      # local_indexes:
+      # - name: mylocal
+      #   sort_key:
+      #     name: MyOtherSortKey
+      #     type: String
+      #   attributes_to_copy:
+      #   - MyOtherAttribute
+      tags:
+        test: value
